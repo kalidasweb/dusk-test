@@ -23,6 +23,6 @@ test:
     - vendor/bin/phpunit
 #    - ./vendor/laravel/dusk/bin/chromedriver-linux:
 #          background: true
-    - sudo php artisan serve --host=www.dev --port=80 > server.log 2>&1:
+    - sudo php artisan serve --host=localhost --port=80 > server.log 2>&1:
           background: true
     - php artisan dusk
