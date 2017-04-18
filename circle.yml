@@ -7,6 +7,9 @@ machine:
   environment:
       APP_ENV: testing
       APP_KEY: hqstymq2VjceHV2t1Usdsd11wa9yUI6a
+  post:
+    - chromedriver:
+        background: true
 dependencies:
   override:
     - composer install --prefer-dist --no-interaction
@@ -15,19 +18,11 @@ dependencies:
 
 test:
   pre:
-#    - mkdir tests/Browser/console
     - touch server.log
-#    - sudo apt-get install unzip
-#    - wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip -P ./vendor/laravel/dusk/bin/
-#    - unzip ./vendor/laravel/dusk/bin/chromedriver_linux64.zip -d ./vendor/laravel/dusk/bin/
-#    - mv ./vendor/laravel/dusk/bin/chromedriver ./vendor/laravel/dusk/bin/chromedriver-linux
-#    - sudo chmod +x ./vendor/laravel/dusk/bin/chromedriver-linux
   override:
     - vendor/bin/phpunit
-#    - cp -f .env.dusk.local .env
-    - ./vendor/laravel/dusk/bin/chromedriver-linux:
-          background: true
-#    - APP_ENV=dusk
+#    - ./vendor/laravel/dusk/bin/chromedriver-linux:
+#          background: true
     - sudo php artisan serve --host=www.dev --port=80 > server.log 2>&1:
           background: true
     - php artisan dusk
