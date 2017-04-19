@@ -6,7 +6,7 @@ machine:
     - mysql
   environment:
       APP_ENV: testing
-      APP_KEY: hqstymq2VjceHV2t1Usdsd11wa9yUI6a
+      APP_KEY: hqstymq2VjceHV2t1Usdskeksa9yUI6a
   post:
     - chromedriver:
         background: true
