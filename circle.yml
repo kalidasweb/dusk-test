@@ -10,10 +10,6 @@ machine:
   environment:
       APP_ENV: testing
       APP_KEY: randomrandomrandomrandomrandom12
-  post:
-    - chromedriver:
-        background: true
-
 dependencies:
   override:
     - composer install --prefer-dist --no-interaction
@@ -24,6 +20,7 @@ test:
   override:
     - vendor/bin/phpunit
     - ./vendor/laravel/dusk/bin/chromedriver-linux:
+          background: true
     - php artisan serve --host=localhost --port=8080:
           background: true
     - php artisan dusk
