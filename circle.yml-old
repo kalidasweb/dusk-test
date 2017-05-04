@@ -1,0 +1,23 @@
+machine:
+  timezone: America/Los_Angeles
+  services:
+    - mysql
+  environment:
+      APP_ENV: testing
+      APP_KEY: randomrandomrandomrandomrandom12
+  post:
+    - chromedriver:
+        background: true
+
+dependencies:
+  override:
+    - composer install --prefer-dist --no-interaction
+  post:
+    - mv .env.example .env
+
+test:
+  override:
+    - vendor/bin/phpunit
+    - sudo php artisan serve --host=localhost --port=8080:
+          background: true
+    - php artisan dusk
