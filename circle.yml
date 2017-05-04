@@ -1,4 +1,9 @@
 machine:
+  pre:
+    - sudo apt-get update; USE_PRECOMPILE=true sudo -E circleci-install php 7.1.0
+    - sudo apt-get install --only-upgrade google-chrome-stable
+  php:
+    version: 7.1.0
   timezone: America/Los_Angeles
   services:
     - mysql
@@ -17,7 +22,6 @@ dependencies:
 
 test:
   override:
-    - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
     - vendor/bin/phpunit
     - php artisan serve --host=localhost --port=8080:
           background: true
