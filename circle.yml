@@ -18,4 +18,4 @@ test:
           background: true
     - sudo php artisan serve --host=localhost --port=80:
           background: true
-    - php artisan dusk
+    - sudo php artisan dusk
