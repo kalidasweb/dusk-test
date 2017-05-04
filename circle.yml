@@ -17,6 +17,6 @@ test:
     - vendor/bin/phpunit
     - ./vendor/laravel/dusk/bin/chromedriver-linux:
           background: true
-    -php artisan serve --host=localhost --port=8000:
+    - php artisan serve --host=localhost --port=8000:
           background: true
     - php artisan dusk
