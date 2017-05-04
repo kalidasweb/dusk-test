@@ -5,9 +5,6 @@ machine:
   environment:
       APP_ENV: testing
       APP_KEY: randomrandomrandomrandomrandom12
-  post:
-    - chromedriver:
-        background: true
 
 dependencies:
   override:
@@ -16,8 +13,13 @@ dependencies:
     - mv .env.example .env
 
 test:
+  pre:
+    - "vendor/bin/phpunit"
+    - "./vendor/laravel/dusk/bin/chromedriver-linux":
+        background: true
+    - cp .env.example .env
+    - "php artisan serve --host=localhost --port=80":
+        background: true
+
   override:
-    - vendor/bin/phpunit
-    - sudo php artisan serve --host=localhost --port=80:
-          background: true
     - php artisan dusk
