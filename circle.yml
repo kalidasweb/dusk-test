@@ -5,6 +5,9 @@ machine:
   environment:
       APP_ENV: testing
       APP_KEY: randomrandomrandomrandomrandom12
+  post:
+    - chromedriver:
+        background: true
 
 dependencies:
   override:
@@ -13,12 +16,9 @@ dependencies:
     - mv .env.example .env
 
 test:
-  pre:
-    - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
-    - "./vendor/laravel/dusk/bin/chromedriver-linux":
-       background: true
   override:
+    - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
     - vendor/bin/phpunit
-    - sudo php artisan serve --host=localhost --port=80:
+    - php artisan serve --host=localhost --port=8080:
           background: true
     - php artisan dusk
