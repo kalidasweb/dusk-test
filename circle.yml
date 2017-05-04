@@ -1,23 +1,24 @@
 machine:
-  pre:
-    - sudo apt-get update; USE_PRECOMPILE=true sudo -E circleci-install php 7.1.0
-
-  php:
-    version: 7.1.0
+  timezone: America/Los_Angeles
+  services:
+    - mysql
+  environment:
+      APP_ENV: testing
+      APP_KEY: randomrandomrandomrandomrandom12
 
 dependencies:
   override:
-    - composer install --no-interaction
+    - composer install --prefer-dist --no-interaction
+  post:
+    - mv .env.example .env
+
 test:
   pre:
     - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
     - "./vendor/laravel/dusk/bin/chromedriver-linux":
-        background: true
-    - cp .env.testing .env
-    - "php artisan serve":
-        background: true
-
+       background: true
   override:
+    - vendor/bin/phpunit
+    - sudo php artisan serve --host=localhost --port=80:
+          background: true
     - php artisan dusk
-
-
