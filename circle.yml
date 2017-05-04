@@ -10,11 +10,14 @@ dependencies:
     - composer install --no-interaction
 test:
   pre:
+    - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
     - "./vendor/laravel/dusk/bin/chromedriver-linux":
         background: true
-    - cp .env.example .env
+    - cp .env.testing .env
     - "php artisan serve":
         background: true
 
   override:
     - php artisan dusk
+
+
